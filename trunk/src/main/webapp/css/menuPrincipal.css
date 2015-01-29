@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*----------------------RESET--------------------*/
+body,html,div,blockquote,img,label,p,h1,h2,h3,h4,h5,h6,pre,ul,ol,li,dl,dt,dd,form,a,fieldset,input,th,td
+	{
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+body {
+	line-height: 1;
+	font-size: 62.5%;
+	background: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+} /*---- 1.0 em = 10px---*/
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+}
+
+/*----------------------RESET--------------------*/
+h1 {
+	font: bold 5em Arial, Helvetica, sans-serif;
+	text-align: center;
+	margin: 30px 0 0 0;
+	background: #333;
+	color: #fff;
+	padding: 10px;
+	letter-spacing: -0.07em;
+	text-shadow: 0px 0px 5px #eaeaea;
+}
+
+.menu {
+	list-style: none;
+	margin: 0 0 0 0;
+	border: 1px solid #c0c0c0;
+	float: left;
+}
+
+.menu li {
+	position: relative;
+	float: left;
+	border-right: 1px solid #c0c0c0;
+}
+
+.menu li a {
+	font-size: 1.3em;
+	color: #333;
+	text-decoration: none;
+	padding: 5px 10px;
+	display: block;
+}
+
+.menu li a:hover {
+	background: #333;
+	color: #fff;
+	-moz-box-shadow: 0 3px 10px 0 #CCC;
+	-webkit-box-shadow: 0 3px 10px 0 #ccc;
+	text-shadow: 0px 0px 5px #fff;
+}
+
+.menu li ul {
+	position: absolute;
+	top: 23px;
+	left: 0px;
+	background-color: #fff;
+	display: none;
+}
+
+.menu li:hover ul ul {
+	display: none;
+}
+
+.menu li:hover ul,.menu li ul li:hover ul,.menu li.over ul,.menu li ul li.over ul
+	{
+	display: block;
+}
+
+.menu li ul li {
+	border: 1px solid #c0c0c0;
+	display: block;
+	width: 110px;
+}
+
+li.border0 {
+	border: 0;
+}
+
+.menu li ul li ul {
+	z-index: 900;
+	top: 0;
+	left: 110px;
+	background: #eaeaea;
+}
+
+body {
+	behavior: url(csshover.htc);
+}
+
+/*Fix IE. Hide from IE Mac\*/
+* html .menu {
+	margin-left: 175px;
+}
+/*End*/

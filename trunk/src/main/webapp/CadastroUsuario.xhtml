@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Nova Visita</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="novaVisita">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h1>Cadastro de Usuario</h1>
+					<h:panelGrid columns="2">
+						<h:outputText value="Login" />
+						<h:inputText style="width:200px"
+							value="#{cadastroUsuario.usuario.login}" />
+						<h:outputText value="Nome" />
+						<h:inputText style="width:300px"
+							value="#{cadastroUsuario.usuario.nome}" />
+						<h:outputText value="Senha" />
+						<h:inputText style="width:200px"
+							value="#{cadastroUsuario.usuario.senha}" />
+
+						<h:outputText value="Empresa" />
+						<h:selectOneMenu style="width:200px"
+							value="#{cadastroUsuario.usuario.empresa}">
+							<f:selectItem itemValue="0" itemLabel="" />
+							<f:selectItems value="#{cadastroUsuario.empresas}" var="empresa"
+								itemValue="#{empresa.id}" itemLabel="#{empresa.empresa}" />
+						</h:selectOneMenu>
+
+						<h:outputText value="Filial" />
+						<h:selectOneMenu style="width:200px"
+							value="#{cadastroUsuario.usuario.filial}">
+							<f:selectItem itemValue="0" itemLabel="" />
+							<f:selectItems value="#{cadastroUsuario.filiais}" var="filial"
+								itemValue="#{filial.id}" itemLabel="#{filial.filial}" />
+						</h:selectOneMenu>
+
+						<h:outputText value="Cargo" />
+						<h:selectOneMenu style="width:200px"
+							value="#{cadastroUsuario.usuario.cargo}">
+							<f:selectItem itemValue="0" itemLabel="" />
+							<f:selectItems value="#{cadastroUsuario.cargos}" var="cargo"
+								itemValue="#{cargo.id}" itemLabel="#{cargo.cargo}" />
+						</h:selectOneMenu>
+
+						<h:outputText value="Centro Custo" />
+						<h:inputText style="width:200px"
+							value="#{cadastroUsuario.usuario.centroCusto}" />
+
+						<h:outputText value="Telefone" />
+						<h:inputText style="width:200px"
+							value="#{cadastroUsuario.usuario.telefone}" />
+
+						<h:outputText value="Cartão de Crédito" />
+						<h:inputText style="width:200px"
+							value="#{cadastroUsuario.usuario.cartaoCredito}" />
+
+						<h:outputText value="Permissão de Admin" />
+						<h:selectBooleanCheckbox value="#{cadastroUsuario.usuario.admin}" />
+
+						<h:outputText value="Usuário Ativo" />
+						<h:selectBooleanCheckbox value="#{cadastroUsuario.usuario.ativo}" />
+
+					</h:panelGrid>
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{cadastroUsuario.salvar}" value="SALVAR"
+						style="width:150px" />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{cadastroUsuario.novoUsuario}" value="LIMPAR"
+						style="width:150px" />
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
