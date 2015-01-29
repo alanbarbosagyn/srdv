@@ -7,80 +7,80 @@
 
 	<managed-bean>
 		<managed-bean-name>login</managed-bean-name>
-		<managed-bean-class>Controller.Login</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.LoginController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>despesaLancamento</managed-bean-name>
-		<managed-bean-class>Controller.DespesaLancamento</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.DespesaLancamentoController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>consultaDespesas</managed-bean-name>
-		<managed-bean-class>Controller.ConsultaDespesas</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.ConsultaDespesasController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>cadastroUsuario</managed-bean-name>
-		<managed-bean-class>Controller.CadastroUsuario</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.CadastroUsuarioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>consultaUsuario</managed-bean-name>
-		<managed-bean-class>Controller.ConsultaUsuario</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.ConsultaUsuarioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>cadastroRDV</managed-bean-name>
-		<managed-bean-class>Controller.CadastroRDV</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.CadastroRDVController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>controleAgenda</managed-bean-name>
-		<managed-bean-class>Controller.ControleAgenda</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.ControleAgendaController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>kmLancamento</managed-bean-name>
-		<managed-bean-class>Controller.KmLancamento</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.KmLancamentoController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>consultaKm</managed-bean-name>
-		<managed-bean-class>Controller.ConsultaKm</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.ConsultaKmController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>resumoRDV</managed-bean-name>
-		<managed-bean-class>Controller.ResumoRDV</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.ResumoRDVController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>relatorioDespesasResumido</managed-bean-name>
-		<managed-bean-class>Controller.RelatorioDespesasResumido</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.RelatorioDespesasResumidoController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>batInput</managed-bean-name>
-		<managed-bean-class>Controller.BatInput</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.BatInputController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>cadastroCicloRDV</managed-bean-name>
-		<managed-bean-class>Controller.CadastroCicloRDV</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.CadastroCicloRDVController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>cadastroDespesaLimite</managed-bean-name>
-		<managed-bean-class>Controller.CadastroDespesaLimite</managed-bean-class>
+		<managed-bean-class>br.com.ac.srdv.controller.CadastroDespesaLimiteController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<lifecycle>
-		<phase-listener>Util.SecurityController</phase-listener>
+		<phase-listener>br.com.ac.srdv.util.SecurityController</phase-listener>
 	</lifecycle>
 </faces-config>
 	
