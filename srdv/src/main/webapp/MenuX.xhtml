@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Menu Principal</title>
+	<link rel="stylesheet" type="text/css" href="css/menu.css" />
+	<link rel="stylesheet" type="text/css" href="css/gmail.css" />
+	<link rel="stylesheet" type="text/css"
+		href="css/menu_assets/styles.css" />
+	<link href="css/menuLateral.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+<h:body style="margin: 0 0 0 0;">
+	<f:view encoding="ISO-8859-1">
+		<h:form>
+
+			<div style="margin: 0 0 0 0">
+				<div align="center">
+					<h:graphicImage id="imgUsurio" value="imagem/logoCifarma.png" />
+					<h1 style="margin: 0 0 0 0">RDV - CONTROLE DE DESPESAS</h1>
+				</div>
+
+				<div align="right">
+					<h:outputText value="Usuario:"
+						style="font-weight: bold;font-size: 110%; padding: 5px" />
+					<h:outputText value="#{login.usuario.nome}"
+						style="font-size: 110%; padding: 10px" />
+					<h:commandButton value="SAIR" action="#{login.deslogar}"
+						styleClass="g-button g-button-red" />
+				</div>
+			</div>
+
+			<!-- ul class="menu" -->
+			<table border="0" cellpadding="20" cellspacing="20" width="500">
+				<tr>
+					<td align="char">
+						<div id="cssmenu">
+							<ul class="cssmenu">
+								<!--<ul>-->
+								<li class='active has-sub'><a href="#" title="Despesa">Despesa</a>
+									<ul>
+										<li class='has-sub'><h:commandLink value="Nova Despesa"
+												action="#{despesaLancamento.novo}" /></li>
+										<li class='has-sub'><h:commandLink
+												value="Consultar Lançamentos"
+												action="#{consultaDespesas.Consultar}" /></li>
+									</ul></li>
+								<li class='active has-sub'><a href="#" title="Kilometragem">Kilometragem</a>
+									<ul>
+										<li class='has-sub'><h:commandLink
+												value="Novo Lançamento" action="#{kmLancamento.novo}" /></li>
+										<li class='has-sub'><h:commandLink
+												value="Consultar Lançamentos"
+												action="#{consultaKm.Consultar}" /></li>
+									</ul></li>
+								<li class='active has-sub'><h:commandLink value="Usuário"
+										rendered="#{login.usuario.admin}" />
+									<ul>
+										<li class='has-sub'><h:commandLink value="Cadastrar"
+												action="#{cadastroUsuario.novoUsuario}" /></li>
+										<li class='has-sub'><h:commandLink value="Consultar"
+												action="#{consultaUsuario.consultar}" /></li>
+									</ul></li>
+								<li class='active has-sub'><h:commandLink
+										value="Cadastrar RDV" action="CadastroRDV"
+										rendered="#{login.usuario.admin}" /></li>
+							</ul>
+						</div>
+					</td>
+
+					<td>
+
+						<div class="signin-box"
+							style="width: 1000px; margin: 0 auto; text-align: left; padding: 20px 20px 20px 20px">
+							<ui:insert name="corpo">
+							</ui:insert>
+						</div>
+					</td>
+
+				</tr>
+			</table>
+
+			<br />
+			<!-- 
+			<div align="center"
+				style="background-color: #33CCFF; padding: 5px 5px 5px 5px">
+				<h:outputText
+					value="Desenvolvido por Carlos Eduardo Teles Rosa - (62) 9277-8209" />
+			</div>
+			 -->
+		</h:form>
+	</f:view>
+</h:body>
+</html>

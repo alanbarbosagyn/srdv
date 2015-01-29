@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Resumo RDV</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+
+	<script type="text/javascript">
+		window.onload = function() {
+			window.print();
+		}
+	</script>
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="resumoRDV">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h1>Resumo RDV</h1>
+					<h:panelGrid columns="2">
+						<h:outputText value="Nome Usuário" />
+						<h:selectOneMenu style="width:300px"
+							value="#{resumoRDV.usuario.login}"
+							disabled="#{not login.usuario.admin}">
+							<f:selectItems value="#{resumoRDV.usuarios}" var="u"
+								itemLabel="#{u.nome}" itemValue="#{u.login}" />
+						</h:selectOneMenu>
+						<h:outputText value="Centro de Custo" style="height: 25px" />
+						<h:inputText value="#{resumoRDV.usuario.centroCusto}"
+							disabled="true" />
+						<h:outputText value="Empresa" style="height: 25px" />
+						<h:inputText value="#{resumoRDV.empresa.empresa}" disabled="true"
+							style="width:300px" />
+						<h:outputText value="Estado" style="height: 25px" />
+						<h:inputText value="#{resumoRDV.filial.filial}" disabled="true"
+							style="width:300px" />
+						<h:outputText value="Cargo" style="height: 25px" />
+						<h:inputText value="#{resumoRDV.cargo.cargo}" disabled="true" />
+						<h:outputText value="RDV" style="height: 25px" />
+						<h:selectOneMenu value="#{resumoRDV.tipoId}">
+							<f:selectItems value="#{resumoRDV.tipos}" var="t"
+								itemLabel="#{t.tipo}" itemValue="#{t.id}" />
+						</h:selectOneMenu>
+					</h:panelGrid>
+
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{resumoRDV.Consultar}" value="CONSULTAR"
+						style="width:150px" />
+					<h:commandButton styleClass="g-button g-button-submit"
+						value="IMPRIMIR" style="border-left:10px; width: 150px"
+						onclick="window.print();" />
+
+					<h2>Despesas</h2>
+					<h:dataTable border="2" class="stats" headerClass="cabecalho"
+						footerClass="cabecalho"
+						columnClasses="t50, t100, t200,t400, t150, t100"
+						value="#{resumoRDV.despesas}" var="despesa"
+						rendered="#{not empty resumoRDV.despesas}">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Código" />
+							</f:facet>
+							<h:outputText value="#{despesa.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data" />
+							</f:facet>
+							<h:outputText value="#{despesa.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Despesa" />
+							</f:facet>
+							<h:outputText value="#{despesa.despesa}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Observação" />
+							</f:facet>
+							<h:outputText value="#{despesa.obs}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Forma Pagamento" />
+							</f:facet>
+							<h:outputText value="#{despesa.formaPagamento}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Valor" />
+							</f:facet>
+							<div align="right" style="padding-right: 10px">
+								<h:outputText value="#{despesa.despesaValor}"
+									style="align:right">
+									<f:convertNumber currencySymbol="R$" type="currency" />
+								</h:outputText>
+							</div>
+						</h:column>
+					</h:dataTable>
+					<table>
+						<tr>
+							<td style="width: 900px"><div>
+									<h:outputText style="font-weight:bold;" value="TOTAL" />
+								</div></td>
+							<td align="right" style="width: 100px"><div>
+									<h:outputText style="font-weight:bold;padding-right:10px"
+										value="#{resumoRDV.despesaTotal}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div></td>
+						</tr>
+					</table>
+					<h2>KM</h2>
+					<h:dataTable border="2" class="stats" headerClass="cabecalho"
+						footerClass="cabecalho" value="#{resumoRDV.kms}" var="despesa"
+						rendered="#{not empty resumoRDV.kms}"
+						columnClasses="t150, t650, t100,t100">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data" />
+							</f:facet>
+							<h:outputText value="#{despesa.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Localizacao" />
+							</f:facet>
+							<h:outputText value="#{despesa.localizacao}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="KM" />
+							</f:facet>
+							<div align="right" style="padding-right: 10px">
+								<h:outputText value="#{despesa.km}" style="align:right">
+									<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+								</h:outputText>
+							</div>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Valor" />
+							</f:facet>
+							<div align="right" style="padding-right: 10px">
+								<h:outputText value="#{despesa.indiceKm * despesa.km}"
+									style="align:right">
+									<f:convertNumber currencySymbol="R$" type="currency" />
+								</h:outputText>
+							</div>
+						</h:column>
+					</h:dataTable>
+					<table>
+						<tr>
+							<td style="width: 800px"><div>
+									<h:outputText style="font-weight:bold;" value="TOTAL" />
+								</div></td>
+							<td align="right" style="width: 100px"><div>
+									<h:outputText style="font-weight:bold;padding-right:10px"
+										value="#{resumoRDV.kmTotal}">
+										<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+									</h:outputText>
+								</div></td>
+							<td align="right" style="width: 100px"><div>
+									<h:outputText style="font-weight:bold;padding-right:10px"
+										value="#{resumoRDV.kmReceber}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div></td>
+						</tr>
+					</table>
+
+					<h2>Resumo</h2>
+					<table>
+						<tr>
+							<td><h:outputText style="font-size: 120%"
+									value="KM Rodado: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-size: 120%"
+										value="#{resumoRDV.kmReceber}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText style="font-size: 120%"
+									value="Despesa Combustível: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-size: 120%"
+										value="#{resumoRDV.despesaKM}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText style="font-weight:bold;font-size: 120%"
+									value="Diferença KM: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-weight:bold;font-size: 120%"
+										value="#{resumoRDV.diferencaKM}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+							<td><h:outputText style="font-size: 120%" value="(+)" /></td>
+						</tr>
+						<tr>
+							<td width="200px"><h:outputText style="font-size: 120%"
+									value="-" /></td>
+							<td>
+								<div align="right">
+									<h:outputText value="" style="font-size: 120%">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText style="font-size: 120%"
+									value="Despesas Dinheiro: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-size: 120%"
+										value="#{resumoRDV.despesaDinheiro}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+							<td><h:outputText style="font-size: 120%" value="(+)" /></td>
+						</tr>
+						<tr>
+							<td width="200px"><h:outputText style="font-size: 120%"
+									value="Despesas Cartão: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText value="#{resumoRDV.despesaCartao}"
+										style="font-size: 120%">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="200px"><h:outputText style="font-size: 120%"
+									value="-" /></td>
+							<td>
+								<div align="right">
+									<h:outputText value="" style="font-size: 120%">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText style="font-weight:bold;font-size: 120%"
+									value="Valor a Receber: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-weight:bold;font-size: 120%"
+										value="#{resumoRDV.valorReceber}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+					</table>
+
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<table>
+						<tr>
+							<td>
+								<div align="center" style="width: 450px; padding-right: 100px">
+									<hr />
+									<h:outputLabel style="font-weight:bold;font-size: 120%"
+										value="#{resumoRDV.usuario.nome}" />
+								</div>
+							</td>
+							<td>
+								<div align="center" style="width: 450px">
+									<hr style="padding-left: 50px" />
+									<h:outputLabel style="font-weight:bold;font-size: 120%"
+										value="SUPERIOR IMEDIATO" />
+								</div>
+							</td>
+
+						</tr>
+					</table>
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

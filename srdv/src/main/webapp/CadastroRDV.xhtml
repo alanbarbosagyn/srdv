@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Cadastro RDV</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="novaVisita">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h4>Cadastrar</h4>
+					<h:panelGrid columns="2">
+						<h:outputText value="Nome" />
+						<h:inputText value="#{cadastroRDV.rdv.tipo}" />
+						<h:outputText value="Data Inicial" />
+						<h:inputText value="#{cadastroRDV.rdv.dataInicial}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="#{initParam.timezone}" />
+						</h:inputText>
+						<h:outputText value="Data Final" />
+						<h:inputText value="#{cadastroRDV.rdv.dataFinal}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="#{initParam.timezone}" />
+						</h:inputText>
+						<h:outputText value="Liberado" />
+						<h:selectBooleanCheckbox value="#{cadastroRDV.rdv.liberado}" />
+
+					</h:panelGrid>
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{cadastroRDV.salvar}" value="SALVAR" style="width:150px" />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{cadastroRDV.novo}" value="NOVO" style="width:150px" />
+					<br />
+					<br />
+					<h4>Consultar</h4>
+					<h:panelGrid columns="2">
+						<h:outputText value="Data Inicial" />
+						<h:inputText style="width:100px"
+							value="#{cadastroRDV.dataInicial}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText>
+						<h:outputText value="Data Final" />
+						<h:inputText style="width:100px" value="#{cadastroRDV.dataFinal}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText>
+					</h:panelGrid>
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{cadastroRDV.consultar}" value="CONSULTAR"
+						style="width:150px" />
+					<br />
+					<br />
+					<h:dataTable border="2" style="width:760px" styleClass="Tabela"
+						value="#{cadastroRDV.listaRdv}" var="rdv"
+						rendered="#{not empty cadastroRDV.listaRdv}">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Opções" />
+							</f:facet>
+							<h:commandButton value="EDITAR"
+								styleClass="g-button g-button-submit"
+								action="#{cadastroRDV.editar}">
+								<f:setPropertyActionListener target="#{cadastroRDV.rdv}"
+									value="#{rdv}" />
+							</h:commandButton>
+							<h:commandButton value="EXCLUIR" action="#{cadastroRDV.excluir}"
+								styleClass="g-button g-button-red"
+								onclick="return confirm('Confirma Exclusão do RDV?');">
+								<f:setPropertyActionListener target="#{cadastroRDV.rdv}"
+									value="#{rdv}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{rdv.tipo}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data Inicial" />
+							</f:facet>
+							<h:outputText value="#{rdv.dataInicial}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data Final" />
+							</f:facet>
+							<h:outputText value="#{rdv.dataFinal}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Liberado" />
+							</f:facet>
+							<h:selectBooleanCheckbox disabled="true" value="#{rdv.liberado}" />
+						</h:column>
+
+					</h:dataTable>
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

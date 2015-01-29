@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Nova Visita</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="consultaKM">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h1>Consulta de Km</h1>
+					<h:outputText value="RDV" />
+					<h:selectOneMenu value="#{consultaKm.tipoId}">
+						<f:selectItems value="#{consultaKm.tipos}" var="t"
+							itemLabel="#{t.tipo}" itemValue="#{t.id}" />
+					</h:selectOneMenu>
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{consultaKm.Consultar}" value="CONSULTAR"
+						style="width:150px" />
+					<br />
+					<br />
+					<h:dataTable border="2" style="width:1000px" styleClass="Tabela"
+						value="#{consultaKm.despesas}" var="despesa"
+						rendered="#{not empty consultaKm.despesas}">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ações" />
+							</f:facet>
+							<h:commandButton value="EDITAR"
+								styleClass="g-button g-button-submit"
+								action="#{kmLancamento.editar}">
+								<f:setPropertyActionListener
+									target="#{kmLancamento.kmLancamento}" value="#{despesa}" />
+							</h:commandButton>
+							<h:commandButton value="EXCLUIR" action="#{consultaKm.excluir}"
+								styleClass="g-button g-button-red"
+								onclick="return confirm('Confirma Exclusão da Despesa?');">
+								<f:setPropertyActionListener target="#{consultaKm.despesa}"
+									value="#{despesa}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Localizacao" />
+							</f:facet>
+							<h:outputText value="#{despesa.localizacao}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="KM" />
+							</f:facet>
+							<h:outputText value="#{despesa.km}" style="align:right">
+								<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data" />
+							</f:facet>
+							<h:outputText value="#{despesa.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="RDV" />
+							</f:facet>
+							<h:outputText value="#{despesa.tipo}" />
+						</h:column>
+					</h:dataTable>
+
+					<br />
+					<br />
+					<table>
+						<tr>
+							<td><h:outputText style="font-weight:bold;font-size:120%"
+									value="DISTANCIA PERCORRIDA: " /></td>
+							<td>
+								<div align="right">
+									<div align="right">
+										<h:outputText style="font-weight:bold;font-size:120%"
+											value="#{consultaKm.kmTotal}">
+											<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+										</h:outputText>
+										<h:outputText style="font-weight:bold;font-size:120%"
+											value=" KM" />
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputText style="font-weight:bold;font-size:120%"
+									value="VALOR TOTAL: " /></td>
+							<td>
+								<div align="right">
+									<h:outputText style="font-weight:bold;font-size:120%"
+										value="#{consultaKm.valorKm}">
+										<f:convertNumber currencySymbol="R$" type="currency" />
+									</h:outputText>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
