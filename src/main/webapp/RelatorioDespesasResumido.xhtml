@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Nova Visita</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+
+	<script type="text/javascript">
+		window.onload = function() {
+			window.print();
+		}
+	</script>
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="novaVisita">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h1>Consulta de Despesas</h1>
+					<h:outputText value="RDV" />
+					<h:selectOneMenu value="#{consultaDespesas.tipoId}">
+						<f:selectItems value="#{consultaDespesas.tipos}" var="t"
+							itemLabel="#{t.tipo}" itemValue="#{t.id}" />
+					</h:selectOneMenu>
+
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{consultaDespesas.Consultar}" value="CONSULTAR"
+						style="width:150px" />
+					<h:commandButton styleClass="g-button g-button-submit"
+						value="IMPRIMIR" style="border-left:10px; width: 150px"
+						onclick="window.print();" />
+
+					<br />
+					<br />
+					<h:dataTable border="2" style="width:1000px" styleClass="Tabela"
+						value="#{consultaDespesas.despesas}" var="despesa"
+						rendered="#{not empty consultaDespesas.despesas}">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Código" />
+							</f:facet>
+							<h:outputText value="#{despesa.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Despesa" />
+							</f:facet>
+							<h:outputText value="#{despesa.despesa}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Observação" />
+							</f:facet>
+							<h:outputText value="#{despesa.obs}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Forma Pagamento" />
+							</f:facet>
+							<h:outputText value="#{despesa.formaPagamento}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Valor" />
+							</f:facet>
+							<h:outputText value="#{despesa.despesaValor}" style="align:right">
+								<f:convertNumber minFractionDigits="2" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Data" />
+							</f:facet>
+							<h:outputText value="#{despesa.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="RDV" />
+							</f:facet>
+							<h:outputText value="#{despesa.tipo}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ações" />
+							</f:facet>
+							<h:commandButton value="EDITAR"
+								styleClass="g-button g-button-submit"
+								action="#{despesaLancamento.editar}">
+								<f:setPropertyActionListener
+									target="#{despesaLancamento.despesaLancamento}"
+									value="#{despesa}" />
+							</h:commandButton>
+							<h:commandButton value="EXCLUIR"
+								action="#{consultaDespesas.excluir}"
+								styleClass="g-button g-button-red"
+								onclick="return confirm('Confirma Exclusão da Despesa?');">
+								<f:setPropertyActionListener
+									target="#{consultaDespesas.despesa}" value="#{despesa}" />
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
+
+					<br />
+					<br />
+					<h:outputText style="font-weight:bold;font-size:120%"
+						value="VALOR TOTAL DE DESPESAS: " />
+					<h:outputText style="font-weight:bold;font-size:120%"
+						value="#{consultaDespesas.totalDespesas}">,
+					<f:convertNumber currencySymbol="R$" type="currency" />
+					</h:outputText>
+
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

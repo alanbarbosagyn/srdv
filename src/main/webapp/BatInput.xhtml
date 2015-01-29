@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>BatInput</title>
+	<link rel="stylesheet" type="text/css" href="css/tabela.css" />
+
+	<script type="text/javascript">
+		window.onload = function() {
+			window.print();
+		}
+	</script>
+</h:head>
+<ui:composition template="/Menu.xhtml">
+	<ui:define name="corpo">
+		<h:body>
+			<f:view encoding="ISO-8859-1">
+				<h:form id="BatInput">
+					<h:messages layout="table" errorStyle="color: red"
+						infoStyle="color: green" warnStyle="color: orange"
+						fatalStyle="color: gray" showDetail="true" />
+					<h1>Bat Input</h1>
+					<h:outputText value="Bat Input" />
+					<h:selectOneMenu value="#{batInput.tipoId}">
+						<f:selectItems value="#{batInput.tipos}" var="t"
+							itemLabel="#{t.tipo}" itemValue="#{t.id}" />
+					</h:selectOneMenu>
+					<br />
+					<h:commandButton styleClass="g-button g-button-submit"
+						action="#{batInput.Gerar}" value="GERAR" style="width:150px" />
+				</h:form>
+			</f:view>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
