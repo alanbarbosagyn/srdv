@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 
 import br.com.ac.srdv.dao.AgendaDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.Agenda;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 import br.com.ac.srdv.util.Sessao;
@@ -23,7 +23,7 @@ public class ControleAgendaController {
 
 	private List<Usuario> usuarios;
 	private Usuario usuario;
-	private List<Tipo> tipos;
+	private List<Ciclo> tipos;
 	private int tipoId;
 	private List<Agenda> listaAgenda;
 	private Agenda agenda;
@@ -57,8 +57,8 @@ public class ControleAgendaController {
 			c.add(Calendar.DAY_OF_YEAR, -370);
 			Date dIni = c.getTime();
 
-			tipos = new TipoDao().getTipos(dIni);
-			tipoId = new TipoDao().getTipo(new Date()).getId();
+			tipos = new CicloDao().getTipos(dIni);
+			tipoId = new CicloDao().getTipo(new Date()).getId();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,9 +78,9 @@ public class ControleAgendaController {
 
 	public String consultar() {
 
-		Tipo t = null;
+		Ciclo t = null;
 		try {
-			t = new TipoDao().getTipo(tipoId);
+			t = new CicloDao().getTipo(tipoId);
 		} catch (Exception e1) {
 			Mensagem.Erro("ERRO AO CONSULTAR TIPOS", e1.getMessage());
 			e1.printStackTrace();
@@ -153,7 +153,7 @@ public class ControleAgendaController {
 			return "";
 
 		try {
-			new TipoDao().excluir(agenda.getId());
+			new CicloDao().excluir(agenda.getId());
 			Mensagem.Info("AGENDA EXCLU�DO COM SUCESSO!", "");
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO EXCLUIR RDV!", e.getMessage());
@@ -177,11 +177,11 @@ public class ControleAgendaController {
 		this.usuario = usuario;
 	}
 
-	public List<Tipo> getTipos() {
+	public List<Ciclo> getTipos() {
 		return tipos;
 	}
 
-	public void setTipos(List<Tipo> tipos) {
+	public void setTipos(List<Ciclo> tipos) {
 		this.tipos = tipos;
 	}
 

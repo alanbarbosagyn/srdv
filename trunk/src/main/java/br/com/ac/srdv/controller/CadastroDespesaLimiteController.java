@@ -6,17 +6,17 @@ import java.util.List;
 import org.primefaces.event.RowEditEvent;
 
 import br.com.ac.srdv.dao.DespesaLimiteDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.DespesaLimite;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 
 public class CadastroDespesaLimiteController {
 
-	private List<Tipo> listaRdv;
-	private Tipo rdv;
+	private List<Ciclo> listaRdv;
+	private Ciclo rdv;
 	private List<WrapperA> lista;
 
 	public CadastroDespesaLimiteController() {
@@ -24,12 +24,12 @@ public class CadastroDespesaLimiteController {
 	}
 
 	public String novo() {
-		rdv = new Tipo();
+		rdv = new Ciclo();
 		rdv.setLiberado(true);
 		lista = new ArrayList<WrapperA>();
 
 		try {
-			listaRdv = new TipoDao().getTodosTipos();
+			listaRdv = new CicloDao().getTodosTipos();
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO CONSULTAR RDV", e.getMessage());
 		}
@@ -103,19 +103,19 @@ public class CadastroDespesaLimiteController {
 		return "";
 	}
 
-	public List<Tipo> getListaRdv() {
+	public List<Ciclo> getListaRdv() {
 		return listaRdv;
 	}
 
-	public void setListaRdv(List<Tipo> listaRdv) {
+	public void setListaRdv(List<Ciclo> listaRdv) {
 		this.listaRdv = listaRdv;
 	}
 
-	public Tipo getRdv() {
+	public Ciclo getRdv() {
 		return rdv;
 	}
 
-	public void setRdv(Tipo rdv) {
+	public void setRdv(Ciclo rdv) {
 		this.rdv = rdv;
 	}
 

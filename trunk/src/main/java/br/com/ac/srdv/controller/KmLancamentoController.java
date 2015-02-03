@@ -15,11 +15,11 @@ import br.com.ac.srdv.dao.CargoDao;
 import br.com.ac.srdv.dao.EmpresaDao;
 import br.com.ac.srdv.dao.FilialDao;
 import br.com.ac.srdv.dao.KmLancamentoDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.Filial;
 import br.com.ac.srdv.modelo.KmLancamento;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 import br.com.ac.srdv.util.Sessao;
@@ -50,8 +50,8 @@ public class KmLancamentoController {
 		if (kmLancamento.getData() == null)
 			return;
 
-		TipoDao tipDao = new TipoDao();
-		Tipo tipo = null;
+		CicloDao tipDao = new CicloDao();
+		Ciclo tipo = null;
 		try {
 			tipo = tipDao.getTipo(kmLancamento.getData());
 		} catch (Exception e) {
@@ -188,7 +188,7 @@ public class KmLancamentoController {
 		// VERIFICA SE ESTÁ NO RDV ATUAL
 
 		try {
-			Tipo t = new TipoDao().getTipo(kmLancamento.getData());
+			Ciclo t = new CicloDao().getTipo(kmLancamento.getData());
 
 			if (t.isLiberado() == false) {
 				Mensagem.Erro(

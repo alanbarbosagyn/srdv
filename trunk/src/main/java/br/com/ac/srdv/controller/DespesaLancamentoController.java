@@ -18,13 +18,13 @@ import br.com.ac.srdv.dao.DespesaLimiteDao;
 import br.com.ac.srdv.dao.EmpresaDao;
 import br.com.ac.srdv.dao.FilialDao;
 import br.com.ac.srdv.dao.FormaPagamentoDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.Despesa;
 import br.com.ac.srdv.modelo.DespesaLancamento;
 import br.com.ac.srdv.modelo.DespesaLimite;
 import br.com.ac.srdv.modelo.FormaPagamento;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 import br.com.ac.srdv.util.Sessao;
@@ -35,7 +35,7 @@ public class DespesaLancamentoController {
 	private List<Usuario> usuarios;
 	private List<Despesa> despesas;
 	private List<FormaPagamento> formaPagamentos;
-	Tipo tipo = null;
+	Ciclo tipo = null;
 
 	public DespesaLancamentoController() {
 		novo();
@@ -58,7 +58,7 @@ public class DespesaLancamentoController {
 		if (despesaLancamento.getData() == null)
 			return;
 
-		TipoDao tipDao = new TipoDao();
+		CicloDao tipDao = new CicloDao();
 
 		try {
 			tipo = tipDao.getTipo(despesaLancamento.getData());
@@ -163,7 +163,7 @@ public class DespesaLancamentoController {
 		despesaLancamento.setObs(despesaLancamento.getObs().toUpperCase());
 
 		try {
-			tipo = new TipoDao().getTipo(despesaLancamento.getData());
+			tipo = new CicloDao().getTipo(despesaLancamento.getData());
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO ACESSAR O BANCO DE DADOS", e.getMessage());
 		}
@@ -267,7 +267,7 @@ public class DespesaLancamentoController {
 		// VERIFICA SE ESTÁ NO RDV ATUAL
 
 		try {
-			Tipo t = new TipoDao().getTipo(despesaLancamento.getData());
+			Ciclo t = new CicloDao().getTipo(despesaLancamento.getData());
 
 			if (t.isLiberado() == false) {
 				Mensagem.Erro(
