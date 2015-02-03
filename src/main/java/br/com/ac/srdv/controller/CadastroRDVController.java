@@ -3,14 +3,14 @@ package br.com.ac.srdv.controller;
 import java.util.Date;
 import java.util.List;
 
-import br.com.ac.srdv.dao.TipoDao;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.dao.CicloDao;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.util.Mensagem;
 
 public class CadastroRDVController {
 
-	private List<Tipo> listaRdv;
-	private Tipo rdv;
+	private List<Ciclo> listaRdv;
+	private Ciclo rdv;
 	private Date dataInicial;
 	private Date dataFinal;
 
@@ -29,7 +29,7 @@ public class CadastroRDVController {
 		}
 
 		try {
-			new TipoDao().salvar(rdv);
+			new CicloDao().salvar(rdv);
 			Mensagem.Info("RDV SALVO COM SUCESSO!", "");
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO SALVAR RDV!", e.getMessage());
@@ -41,7 +41,7 @@ public class CadastroRDVController {
 	}
 
 	public String novo() {
-		rdv = new Tipo();
+		rdv = new Ciclo();
 		rdv.setLiberado(true);
 		consultar();
 		return "CadastroRDV";
@@ -50,9 +50,9 @@ public class CadastroRDVController {
 	public String consultar() {
 		try {
 			if (dataInicial == null || dataFinal == null) {
-				listaRdv = new TipoDao().getTodosTipos();
+				listaRdv = new CicloDao().getTodosTipos();
 			} else {
-				listaRdv = new TipoDao().getTipos(dataInicial, dataFinal);
+				listaRdv = new CicloDao().getTipos(dataInicial, dataFinal);
 			}
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO CONSULTAR RDV", e.getMessage());
@@ -69,7 +69,7 @@ public class CadastroRDVController {
 			return "";
 
 		try {
-			new TipoDao().excluir(rdv.getId());
+			new CicloDao().excluir(rdv.getId());
 			Mensagem.Info("RDV EXCLU�DO COM SUCESSO!", "");
 		} catch (Exception e) {
 			Mensagem.Erro("ERRO AO EXCLUIR RDV!", e.getMessage());
@@ -77,19 +77,19 @@ public class CadastroRDVController {
 		return "";
 	}
 
-	public List<Tipo> getListaRdv() {
+	public List<Ciclo> getListaRdv() {
 		return listaRdv;
 	}
 
-	public void setListaRdv(List<Tipo> listaRdv) {
+	public void setListaRdv(List<Ciclo> listaRdv) {
 		this.listaRdv = listaRdv;
 	}
 
-	public Tipo getRdv() {
+	public Ciclo getRdv() {
 		return rdv;
 	}
 
-	public void setRdv(Tipo rdv) {
+	public void setRdv(Ciclo rdv) {
 		this.rdv = rdv;
 	}
 

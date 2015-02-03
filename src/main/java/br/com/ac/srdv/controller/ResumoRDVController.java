@@ -10,14 +10,14 @@ import br.com.ac.srdv.dao.DespesaLancamentoDao;
 import br.com.ac.srdv.dao.EmpresaDao;
 import br.com.ac.srdv.dao.FilialDao;
 import br.com.ac.srdv.dao.KmLancamentoDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.Cargo;
 import br.com.ac.srdv.modelo.DespesaLancamento;
 import br.com.ac.srdv.modelo.Empresa;
 import br.com.ac.srdv.modelo.Filial;
 import br.com.ac.srdv.modelo.KmLancamento;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 import br.com.ac.srdv.util.Sessao;
@@ -29,8 +29,8 @@ public class ResumoRDVController {
 	private Filial filial;
 	private Cargo cargo;
 	private List<Usuario> usuarios;
-	private List<Tipo> tipos;
-	private Tipo tipoSelecionado;
+	private List<Ciclo> tipos;
+	private Ciclo tipoSelecionado;
 	private int tipoId;
 	private Date dataInicial;
 	private Date dataFinal;
@@ -53,8 +53,8 @@ public class ResumoRDVController {
 			c.add(Calendar.DAY_OF_YEAR, -370);
 			Date dIni = c.getTime();
 
-			tipos = new TipoDao().getTipos(dIni);
-			tipoId = new TipoDao().getTipo(new Date()).getId();
+			tipos = new CicloDao().getTipos(dIni);
+			tipoId = new CicloDao().getTipo(new Date()).getId();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class ResumoRDVController {
 
 	public String Consultar() {
 
-		for (Tipo t : tipos) {
+		for (Ciclo t : tipos) {
 			if (t.getId() == tipoId) {
 				tipoSelecionado = t;
 				break;
@@ -169,19 +169,19 @@ public class ResumoRDVController {
 		this.dataFinal = dataFinal;
 	}
 
-	public List<Tipo> getTipos() {
+	public List<Ciclo> getTipos() {
 		return tipos;
 	}
 
-	public void setTipos(List<Tipo> tipos) {
+	public void setTipos(List<Ciclo> tipos) {
 		this.tipos = tipos;
 	}
 
-	public Tipo getTipoSelecionado() {
+	public Ciclo getTipoSelecionado() {
 		return tipoSelecionado;
 	}
 
-	public void setTipoSelecionado(Tipo tipoSelecionado) {
+	public void setTipoSelecionado(Ciclo tipoSelecionado) {
 		this.tipoSelecionado = tipoSelecionado;
 	}
 

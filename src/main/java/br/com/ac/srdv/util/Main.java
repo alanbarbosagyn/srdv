@@ -7,7 +7,7 @@ import br.com.ac.srdv.dao.DespesaDao;
 import br.com.ac.srdv.dao.DespesaLancamentoDao;
 import br.com.ac.srdv.dao.EmpresaDao;
 import br.com.ac.srdv.dao.FilialDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
 		new DespesaLancamentoDao().createTable();
 		new EmpresaDao().createTable();
 		new FilialDao().createTable();
-		new TipoDao().createTable();
+		new CicloDao().createTable();
 		new UsuarioDao().createTable();
 
 		System.out.println("-------------------------------------");

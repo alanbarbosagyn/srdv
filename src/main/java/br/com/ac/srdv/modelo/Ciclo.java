@@ -2,7 +2,7 @@ package br.com.ac.srdv.modelo;
 
 import java.util.Date;
 
-public class Tipo {
+public class Ciclo {
 
 	private int id;
 	private String tipo;

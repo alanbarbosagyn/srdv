@@ -14,14 +14,14 @@ import br.com.ac.srdv.dao.DespesaLancamentoDao;
 import br.com.ac.srdv.dao.EmpresaDao;
 import br.com.ac.srdv.dao.FilialDao;
 import br.com.ac.srdv.dao.KmLancamentoDao;
-import br.com.ac.srdv.dao.TipoDao;
+import br.com.ac.srdv.dao.CicloDao;
 import br.com.ac.srdv.dao.UsuarioDao;
 import br.com.ac.srdv.modelo.CicloRDV;
 import br.com.ac.srdv.modelo.DespesaLancamento;
 import br.com.ac.srdv.modelo.Empresa;
 import br.com.ac.srdv.modelo.Filial;
 import br.com.ac.srdv.modelo.KmLancamento;
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.modelo.Usuario;
 import br.com.ac.srdv.util.Mensagem;
 import br.com.ac.srdv.util.Sessao;
@@ -32,8 +32,8 @@ public class CadastroCicloRDVController {
 	private Empresa empresa;
 	private Filial filial;
 	private List<Usuario> usuarios;
-	private List<Tipo> tipos;
-	private Tipo tipo;
+	private List<Ciclo> tipos;
+	private Ciclo tipo;
 	private int tipoId;
 
 	private CicloRDV cicloRDV;
@@ -47,8 +47,8 @@ public class CadastroCicloRDVController {
 			c.add(Calendar.DAY_OF_YEAR, -370);
 			Date dIni = c.getTime();
 
-			tipos = new TipoDao().getTipos(dIni);
-			tipo = new TipoDao().getTipo(new Date());
+			tipos = new CicloDao().getTipos(dIni);
+			tipo = new CicloDao().getTipo(new Date());
 			tipoId = tipo.getId();
 
 		} catch (Exception e) {
@@ -134,7 +134,7 @@ public class CadastroCicloRDVController {
 		// return "ConsultaDespesas";
 		// }
 
-		for (Tipo t : tipos) {
+		for (Ciclo t : tipos) {
 			if (t.getId() == tipoId) {
 				tipo = t;
 				break;
@@ -263,19 +263,19 @@ public class CadastroCicloRDVController {
 		this.usuarios = usuarios;
 	}
 
-	public List<Tipo> getTipos() {
+	public List<Ciclo> getTipos() {
 		return tipos;
 	}
 
-	public void setTipos(List<Tipo> tipos) {
+	public void setTipos(List<Ciclo> tipos) {
 		this.tipos = tipos;
 	}
 
-	public Tipo getTipo() {
+	public Ciclo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Tipo tipo) {
+	public void setTipo(Ciclo tipo) {
 		this.tipo = tipo;
 	}
 

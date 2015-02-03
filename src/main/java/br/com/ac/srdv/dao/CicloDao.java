@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.ac.srdv.modelo.Tipo;
+import br.com.ac.srdv.modelo.Ciclo;
 import br.com.ac.srdv.util.Conexao;
 import br.com.ac.srdv.util.Resultado;
 
-public class TipoDao {
+public class CicloDao {
 
 	Conexao con;
 
-	public TipoDao() {
+	public CicloDao() {
 		con = Conexao.getConexaoAtual();
 	}
 
@@ -39,7 +39,7 @@ public class TipoDao {
 
 	}
 
-	public void salvar(Tipo tipo) throws Exception {
+	public void salvar(Ciclo tipo) throws Exception {
 
 		int liberado = tipo.isLiberado() ? 1 : 0;
 
@@ -80,7 +80,7 @@ public class TipoDao {
 
 	}
 
-	public List<Tipo> getTipos(Date dataInicial, Date dataFinal)
+	public List<Ciclo> getTipos(Date dataInicial, Date dataFinal)
 			throws Exception {
 		String dataI = new SimpleDateFormat("dd-MM-yyyy").format(dataInicial);
 		String dataF = new SimpleDateFormat("dd-MM-yyyy").format(dataFinal);
@@ -90,7 +90,7 @@ public class TipoDao {
 						+ dataI + "' and dataFinal <= '" + dataF
 						+ "' order by dataInicial ");
 
-		List<Tipo> lista = new ArrayList<Tipo>();
+		List<Ciclo> lista = new ArrayList<Ciclo>();
 
 		while (result.next())
 			lista.add(parse(result));
@@ -99,14 +99,14 @@ public class TipoDao {
 		return lista;
 	}
 
-	public List<Tipo> getTipos(Date dataInicial) throws Exception {
+	public List<Ciclo> getTipos(Date dataInicial) throws Exception {
 		String dataI = new SimpleDateFormat("dd-MM-yyyy").format(dataInicial);
 
 		Resultado result = con
 				.consultar("select * from RDV_Tipo WHERE dataInicial >= '"
 						+ dataI + "' order by dataInicial ");
 
-		List<Tipo> lista = new ArrayList<Tipo>();
+		List<Ciclo> lista = new ArrayList<Ciclo>();
 
 		while (result.next())
 			lista.add(parse(result));
@@ -115,12 +115,12 @@ public class TipoDao {
 		return lista;
 	}
 
-	public Tipo getTipo(int id) throws Exception {
+	public Ciclo getTipo(int id) throws Exception {
 
 		Resultado result = con.consultar("select * from RDV_Tipo WHERE id = "
 				+ id);
 
-		Tipo item = null;
+		Ciclo item = null;
 
 		if (result.next())
 			item = parse(result);
@@ -130,7 +130,7 @@ public class TipoDao {
 
 	}
 
-	public Tipo getTipo(Date data) throws Exception {
+	public Ciclo getTipo(Date data) throws Exception {
 
 		String dataF = new SimpleDateFormat("dd-MM-yyyy").format(data);
 
@@ -138,7 +138,7 @@ public class TipoDao {
 				.consultar("select * from RDV_Tipo WHERE dataInicial <= '"
 						+ dataF + "' and dataFinal >= '" + dataF + "'");
 
-		Tipo item = null;
+		Ciclo item = null;
 
 		if (result.next())
 			item = parse(result);
@@ -148,11 +148,11 @@ public class TipoDao {
 
 	}
 
-	public List<Tipo> getTodosTipos() throws Exception {
+	public List<Ciclo> getTodosTipos() throws Exception {
 		Resultado result = con
 				.consultar("select * from RDV_Tipo order by tipo");
 
-		List<Tipo> lista = new ArrayList<Tipo>();
+		List<Ciclo> lista = new ArrayList<Ciclo>();
 
 		while (result.next()) {
 			lista.add(parse(result));
@@ -161,8 +161,8 @@ public class TipoDao {
 		return lista;
 	}
 
-	private Tipo parse(Resultado result) throws Exception, SQLException {
-		Tipo tipo = new Tipo();
+	private Ciclo parse(Resultado result) throws Exception, SQLException {
+		Ciclo tipo = new Ciclo();
 		tipo.setId(result.getInt("id"));
 		tipo.setTipo(result.getString("tipo"));
 		tipo.setDataInicial(result.getDate("dataInicial"));

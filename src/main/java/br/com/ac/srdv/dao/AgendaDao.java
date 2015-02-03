@@ -10,25 +10,12 @@ import br.com.ac.srdv.modelo.Agenda;
 import br.com.ac.srdv.util.Conexao;
 import br.com.ac.srdv.util.Resultado;
 
-public class AgendaDao {
-
-	Conexao con;
-
+public class AgendaDao extends GenericDao {
+	
 	public AgendaDao() {
-		con = Conexao.getConexaoAtual();
-	}
-
-	public void createTable() {
-		String createTable = "CREATE TABLE RDV_Agenda ( "
+		this.createTable = "CREATE TABLE RDV_Agenda ( "
 				+ "id integer primary key, usuario varchar(200), "
-				+ " data date, local varchar(500), acaoPrevista varchar(500),acaoRealizada varchar(500) )";
-
-		con = Conexao.getConexaoAtual();
-
-		try {
-			con.executar(createTable);
-		} catch (Exception e) {
-		}
+				+ " data date, local varchar(500), acaoPrevista varchar(500),acaoRealizada varchar(500) )"; 
 	}
 
 	public void salvar(Agenda agenda) throws Exception {
@@ -67,11 +54,7 @@ public class AgendaDao {
 	}
 
 	public void excluir(int id) throws Exception {
-		if (id == 0)
-			return;
-
-		con.executar("DELETE FROM RDV_Agenda WHERE id = " + id);
-
+		super.excluir("DELETE FROM RDV_Agenda WHERE id = " + id);
 	}
 
 	public List<Agenda> getAgendas(String usuario, Date dataInicial,
