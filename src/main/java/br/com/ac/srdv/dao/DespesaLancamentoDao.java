@@ -188,4 +188,8 @@ public class DespesaLancamentoDao {
 		return despesa;
 	}
 
+	public DespesaLancamento getDespesa(String idDespesa) {
+		return null;
+	}
+
 }

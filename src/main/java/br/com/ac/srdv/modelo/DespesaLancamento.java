@@ -1,9 +1,18 @@
 package br.com.ac.srdv.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DespesaLancamento {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class DespesaLancamento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String empresa;
 	private String filial;
@@ -20,6 +29,11 @@ public class DespesaLancamento {
 	private String tipo;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
+
+	public DespesaLancamento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getId() {
 		return id;
