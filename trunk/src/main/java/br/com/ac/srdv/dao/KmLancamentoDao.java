@@ -180,4 +180,9 @@ public class KmLancamentoDao {
 		return despesa;
 	}
 
+	public KmLancamento getKm(String idKmLancamento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
